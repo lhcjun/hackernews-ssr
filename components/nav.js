@@ -1,19 +1,31 @@
 import Link from 'next/link';
 
 const Nav = () => (
-  <div>
-    <img src="" />
+  <div className="navigation">
     <Link href="/">
-      <button>Home</button>
+      <img src="./static/logo.svg" alt="logo" height="50" />
+    </Link>
+    <Link href="/">
+      <a className="nav-option">News</a>
     </Link>
     <Link href="/about">
-      <button>About</button>
+      <a className="nav-option">About</a>
     </Link>
 
     <style jsx>{`
       a,
       img {
-        padding: 10px;
+        margin: auto 0;
+        padding: 0.6rem 1rem;
+      }
+
+      a,
+      a:hover,
+      a:active,
+      a:visited,
+      a:focus {
+        color: white;
+        text-decoration: none;
       }
     `}</style>
   </div>

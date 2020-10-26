@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'cwTeXYen', 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.navigation {
+    display: flex;
+    background: rgb(51, 48, 53);
+}
+
+.nav-option {
+    font-size: 1.15rem;
+}
+
+img:hover,
+.nav-option:hover {
+    transform: scale(1.05);
+}
+
+.page-margin {
+    margin: 0 2rem;
+}

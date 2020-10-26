@@ -2,7 +2,7 @@ import Layout from '../components/Layout';
 
 const About = () => (
   <Layout>
-    <h1>About page</h1>
+    <h2>Next.js SSR</h2>
   </Layout>
 );
 
