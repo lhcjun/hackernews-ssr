@@ -3,11 +3,18 @@ import Nav from './Nav';
 const Layout = ({ mainTitle, footer, children }) => (
   <div>
     <Nav />
-    <h1>{mainTitle}</h1>
+    <h2>{mainTitle}</h2>
     <hr />
     {children}
     <hr />
-    <h4>{footer}</h4>
+    <h5>{footer}</h5>
+
+    <style jsx>{`
+      h2,
+      h5 {
+        margin: 1rem 2rem;
+      }
+    `}</style>
   </div>
 );
 

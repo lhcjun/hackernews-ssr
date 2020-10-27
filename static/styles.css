@@ -7,6 +7,15 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+h2 {
+    font-weight: 500;
+}
+
+hr {
+    margin-inline-start: 0.5rem;
+    margin-inline-end: 0.5rem;
+}
+
 .navigation {
     display: flex;
     background: rgb(51, 48, 53);

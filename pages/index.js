@@ -14,7 +14,7 @@ const Index = ({ news }) => (
       {news ? (
         news.map((eachNews, i) => (
           <p key={i}>
-            <a href={eachNews.url} target="_blank" className="each-news">
+            <a href={eachNews.url} target="_blank">
               {eachNews.title}
             </a>
           </p>
@@ -25,20 +25,26 @@ const Index = ({ news }) => (
     </Layout>
 
     <style jsx>{`
+      h2,
+      p {
+        margin: 1rem 2rem;
+      }
+
       a,
       a:hover,
       a:active,
       a:visited,
       a:focus {
         text-decoration: none;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
+        font-weight: 400;
       }
 
       a {
         color: rgb(0, 165, 151);
       }
       a:visited {
-        color: purple;
+        color: rgb(81, 6, 131);
       }
       a:hover,
       a:active,

@@ -29,14 +29,6 @@ export default function Custom404() {
         h2 {
           font-size: 1.75rem;
           color: #2f8e89;
-
-          @media screen and (max-width: 400px) {
-            font-size: 1.5rem;
-          }
-
-          @media screen and (max-width: 330px) {
-            font-size: 1.3rem;
-          }
         }
 
         h5 {
@@ -44,10 +36,6 @@ export default function Custom404() {
           font-weight: 500;
           color: #acacac;
           margin: 0;
-
-          @media screen and (max-width: 400px) {
-            font-size: 1rem;
-          }
         }
       `}</style>
     </div>
