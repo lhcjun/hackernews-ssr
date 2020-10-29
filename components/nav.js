@@ -3,7 +3,7 @@ import Link from 'next/link';
 const Nav = () => (
   <div className="navigation">
     <Link href="/">
-      <img src="./static/logo.svg" alt="logo" height="50" />
+      <img src="./static/logo.svg" alt="logo" height="50" className="logo" />
     </Link>
     <Link href="/">
       <a className="nav-option">News</a>

@@ -1,38 +1,34 @@
 import { useState } from 'react';
-import Link from 'next/link';
-import Router from 'next/router';
-import Head from 'next/head';
+import { useRouter } from 'next/router';
 import fetch from 'isomorphic-fetch';
 import Layout from '../components/Layout';
 import Error from './_error';
 
 const Index = ({ news }) => {
-  const [searchValue, setSearchValue] = useState({
-    queryWord: 'react',
-    coolMsg: '',
-  });
+  const router = useRouter();
+  const [searchValue, setSearchValue] = useState('react');
 
-  const { queryWord, coolMsg } = searchValue;
-
-  const onInputChange = (name) => (e) => {
-    setSearchValue({ ...searchValue, [name]: e.target.value });
+  const onInputChange = (e) => {
+    setSearchValue(e.target.value);
   };
 
   const onHandleSubmit = (e) => {
     e.preventDefault();
     // push user input to url router
-    Router.push(`/news/?searchTerm=${queryWord}`);
+    router.push({
+      query: { searchTerm: searchValue },
+    });
   };
 
   const searchForm = () => (
-    <form onSubmit={onHandleSubmit}>
-      <input type="text" value={queryWord} onChange={onInputChange('queryWord')} />
+    <form onSubmit={onHandleSubmit} className="search-area">
       <input
         type="text"
-        placeholder="Write something.."
-        onChange={onInputChange('coolMsg')}
+        value={searchValue}
+        onChange={onInputChange}
+        className="search-box"
       />
-      <button>Search</button>
+      <button className="search-btn">Search</button>
     </form>
   );
 
@@ -42,10 +38,9 @@ const Index = ({ news }) => {
         mainTitle="News"
         footer={`Copyright © ${new Date().getFullYear()}`}
       >
-        {coolMsg}
         {searchForm()}
         <hr />
-        {news ? (
+        {news.length ? (
           news.map((eachNews, i) => (
             <p key={i}>
               <a href={eachNews.url} target="_blank">
@@ -95,10 +90,8 @@ Index.getInitialProps = async ({ query }) => {
   // grab user input query from url router
   let news;
   try {
-    console.log(query);
     const res = await fetch(`https://hn.algolia.com/api/v1/search?query=${query.searchTerm || 'react'}`);
     news = await res.json();
-    console.log(news);
   } catch (err) {
     console.log(err);
     news = [];

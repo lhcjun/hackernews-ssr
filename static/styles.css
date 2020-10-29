@@ -16,6 +16,7 @@ hr {
     margin-inline-end: 0.5rem;
 }
 
+/* nav bar */
 .navigation {
     display: flex;
     background: rgb(51, 48, 53);
@@ -25,7 +26,7 @@ hr {
     font-size: 1.15rem;
 }
 
-img:hover,
+.logo:hover,
 .nav-option:hover {
     transform: scale(1.05);
 }
@@ -33,3 +34,12 @@ img:hover,
 .page-margin {
     margin: 0 2rem;
 }
+
+/* search news */
+.search-area {
+    margin: 2rem;
+}
+
+.search-box {}
+
+.search-btn {}
