@@ -37,9 +37,52 @@ hr {
 
 /* search news */
 .search-area {
-    margin: 2rem;
+    margin: 1.5rem auto;
+    position: relative;
+    width: 20rem;
+    border-radius: .5rem;
+    display: flex;
+    justify-content: center;
 }
 
-.search-box {}
+.search-box,
+.search-btn {
+    height: 3.5rem;
+    border: 0;
+    color: #2f2f2f;
+    font-size: 1.35rem;
+}
 
-.search-btn {}
+.search-box {
+    outline: none;
+    background: #e7e7e7;
+    width: 80%;
+    padding: 0 1.6rem;
+    border-radius: .5rem;
+    position: relative;
+}
+
+.search-btn {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 17%;
+    font-weight: bold;
+    background: #57bd84;
+    border-radius: 0 .5rem .5rem 0;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    transform: scale(1.05);
+    background: #68ce94;
+}
+
+.empty-news {
+    display: flex;
+    justify-content: center;
+    color: rgba(0, 0, 0, 0.3);
+    margin: 28vh auto;
+    font-size: 1.1rem;
+}

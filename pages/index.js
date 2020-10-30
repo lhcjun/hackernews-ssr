@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import fetch from 'isomorphic-fetch';
 import Layout from '../components/Layout';
-import Error from './_error';
 
 const Index = ({ news }) => {
   const router = useRouter();
@@ -23,12 +22,14 @@ const Index = ({ news }) => {
   const searchForm = () => (
     <form onSubmit={onHandleSubmit} className="search-area">
       <input
-        type="text"
+        type="search"
         value={searchValue}
         onChange={onInputChange}
         className="search-box"
       />
-      <button className="search-btn">Search</button>
+      <button className="search-btn">
+        <img src="./static/search.svg" alt="search" height="17" />
+      </button>
     </form>
   );
 
@@ -39,7 +40,6 @@ const Index = ({ news }) => {
         footer={`Copyright © ${new Date().getFullYear()}`}
       >
         {searchForm()}
-        <hr />
         {news.length ? (
           news.map((eachNews, i) => (
             <p key={i}>
@@ -49,7 +49,7 @@ const Index = ({ news }) => {
             </p>
           ))
         ) : (
-          <h3>No Related News</h3>
+          <h3 className='empty-news'>No Related News</h3>
         )}
       </Layout>
 
