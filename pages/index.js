@@ -5,7 +5,7 @@ import Layout from '../components/Layout';
 
 const Index = ({ news }) => {
   const router = useRouter();
-  const [searchValue, setSearchValue] = useState('react');
+  const [searchValue, setSearchValue] = useState('');
 
   const onInputChange = (e) => {
     setSearchValue(e.target.value);
@@ -23,7 +23,8 @@ const Index = ({ news }) => {
     <form onSubmit={onHandleSubmit} className="search-area">
       <input
         type="search"
-        value={searchValue}
+        // value={searchValue}
+        placeholder="What are we looking for ?"
         onChange={onInputChange}
         className="search-box"
       />
@@ -49,7 +50,7 @@ const Index = ({ news }) => {
             </p>
           ))
         ) : (
-          <h3 className='empty-news'>No Related News</h3>
+          <h3 className="empty-news">No Related News</h3>
         )}
       </Layout>
 
@@ -85,12 +86,16 @@ const Index = ({ news }) => {
   );
 };
 
-// data fetching method (with functional component)
-Index.getInitialProps = async ({ query }) => {
+// new data fetching method (gets called on every req & only runs on server-side)
+export async function getServerSideProps({ query }) {
   // grab user input query from url router
   let news;
   try {
-    const res = await fetch(`https://hn.algolia.com/api/v1/search?query=${query.searchTerm || 'react'}`);
+    const res = await fetch(
+      `https://hn.algolia.com/api/v1/search?query=${
+        query.searchTerm || 'react'
+      }`
+    );
     news = await res.json();
   } catch (err) {
     console.log(err);
@@ -98,8 +103,29 @@ Index.getInitialProps = async ({ query }) => {
   }
 
   return {
-    news: news.hits,
+    props: { news: news.hits },
   };
-};
+}
 
 export default Index;
+
+/* old data fetching method - getInitialProps
+
+Initial page load → run on the server only
+Navigating to a different route via the next/link or next/router → run on the client
+
+  Index.getInitialProps = async ({ query }) => {
+    let news;
+    try {
+      const res = await fetch(`https://hn.algolia.com/api/v1/search?query=${query.searchTerm || 'react'}`);
+      news = await res.json();
+    } catch (err) {
+      console.log(err);
+      news = [];
+    }
+
+    return {
+      news: news.hits,
+    };
+  };
+*/
