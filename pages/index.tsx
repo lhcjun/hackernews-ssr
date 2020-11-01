@@ -1,17 +1,28 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
 import fetch from 'isomorphic-fetch';
 import Layout from '../components/Layout';
 
-const Index = ({ news }) => {
+interface INews {
+  created_at: string;
+  title: string;
+  url: string;
+}
+
+interface IIndexProps {
+  news?: Array<INews>;
+}
+
+const Index: React.FC<IIndexProps> = ({ news }) => {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState('');
 
-  const onInputChange = (e) => {
+  const onInputChange = (e: React.SyntheticEvent<HTMLInputElement>): void => {
     setSearchValue(e.target.value);
   };
 
-  const onHandleSubmit = (e) => {
+  const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     // push user input to url router
     router.push({
@@ -87,16 +98,13 @@ const Index = ({ news }) => {
 };
 
 // new data fetching method (gets called on every req & only runs on server-side)
-export async function getServerSideProps({ query }) {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   // grab user input query from url router
   let news;
   try {
-    const res = await fetch(
-      `https://hn.algolia.com/api/v1/search?query=${
-        query.searchTerm || 'react'
-      }`
-    );
+    const res = await fetch(`https://hn.algolia.com/api/v1/search?query=${query.searchTerm || 'react'}`);
     news = await res.json();
+    console.log(news.hits);
   } catch (err) {
     console.log(err);
     news = [];
@@ -105,7 +113,7 @@ export async function getServerSideProps({ query }) {
   return {
     props: { news: news.hits },
   };
-}
+};
 
 export default Index;
 
