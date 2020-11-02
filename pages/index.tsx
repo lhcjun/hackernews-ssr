@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+import * as React from 'react';
 import { GetServerSideProps } from 'next';
 import fetch from 'isomorphic-fetch';
-import Layout from '../components/Layout';
+import Layout from '../components/layout';
+import SearchBar from '../components/searchbar';
 
 interface INews {
   created_at: string;
@@ -15,62 +15,25 @@ interface IIndexProps {
 }
 
 const Index: React.FC<IIndexProps> = ({ news }) => {
-  const router = useRouter();
-  const [searchValue, setSearchValue] = useState('');
-
-  const onInputChange = (e: React.SyntheticEvent<HTMLInputElement>): void => {
-    setSearchValue(e.target.value);
-  };
-
-  const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    // push user input to url router
-    router.push({
-      query: { searchTerm: searchValue },
-    });
-  };
-
-  const searchForm = () => (
-    <form onSubmit={onHandleSubmit} className="search-area">
-      <input
-        type="search"
-        // value={searchValue}
-        placeholder="What are we looking for ?"
-        onChange={onInputChange}
-        className="search-box"
-      />
-      <button className="search-btn">
-        <img src="./static/search.svg" alt="search" height="17" />
-      </button>
-    </form>
-  );
-
   return (
     <div>
       <Layout
         mainTitle="News"
         footer={`Copyright © ${new Date().getFullYear()}`}
       >
-        {searchForm()}
+        <SearchBar />
         {news.length ? (
           news.map((eachNews, i) => (
-            <p key={i}>
+            <p key={i} className='each-news'>
               <a href={eachNews.url} target="_blank">
                 {eachNews.title}
               </a>
             </p>
           ))
-        ) : (
-          <h3 className="empty-news">No Related News</h3>
-        )}
+        ) : <h3 className="empty-news">No Related News</h3>}
       </Layout>
 
       <style jsx>{`
-        h2,
-        p {
-          margin: 1rem 2rem;
-        }
-
         a,
         a:hover,
         a:active,
@@ -117,23 +80,25 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
 export default Index;
 
-/* old data fetching method - getInitialProps
+
+/* 
+old data fetching method - getInitialProps
 
 Initial page load → run on the server only
 Navigating to a different route via the next/link or next/router → run on the client
 
-  Index.getInitialProps = async ({ query }) => {
-    let news;
-    try {
-      const res = await fetch(`https://hn.algolia.com/api/v1/search?query=${query.searchTerm || 'react'}`);
-      news = await res.json();
-    } catch (err) {
-      console.log(err);
-      news = [];
-    }
+    Index.getInitialProps = async ({ query }) => {
+      let news;
+      try {
+        const res = await fetch(`https://hn.algolia.com/api/v1/search?query=${query.searchTerm || 'react'}`);
+        news = await res.json();
+      } catch (err) {
+        console.log(err);
+        news = [];
+      }
 
-    return {
-      news: news.hits,
+      return {
+        news: news.hits,
+      };
     };
-  };
 */
