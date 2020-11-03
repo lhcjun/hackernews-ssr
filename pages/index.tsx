@@ -2,7 +2,6 @@ import * as React from 'react';
 import { GetServerSideProps } from 'next';
 import fetch from 'isomorphic-fetch';
 import Layout from '../components/layout';
-import SearchBar from '../components/searchbar';
 
 interface INews {
   created_at: string;
@@ -21,39 +20,30 @@ const Index: React.FC<IIndexProps> = ({ news }) => {
         mainTitle="News"
         footer={`Copyright © ${new Date().getFullYear()}`}
       >
-        <SearchBar />
         {news.length ? (
           news.map((eachNews, i) => (
-            <p key={i} className='each-news'>
+            <p key={i} className="each-news">
               <a href={eachNews.url} target="_blank">
                 {eachNews.title}
               </a>
             </p>
           ))
-        ) : <h3 className="empty-news">No Related News</h3>}
+        ) : (
+          <h3 className="empty-news">No Related News</h3>
+        )}
       </Layout>
 
       <style jsx>{`
-        a,
-        a:hover,
-        a:active,
-        a:visited,
-        a:focus {
-          text-decoration: none;
-          font-size: 1.2rem;
-          font-weight: 400;
-        }
-
         a {
-          color: rgb(0, 165, 151);
+          color: #1392af;
         }
         a:visited {
-          color: rgb(81, 6, 131);
+          color: #491c67;
         }
         a:hover,
         a:active,
         a:focus {
-          color: black;
+          color: #025296;
         }
       `}</style>
     </div>
@@ -67,7 +57,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   try {
     const res = await fetch(`https://hn.algolia.com/api/v1/search?query=${query.searchTerm || 'react'}`);
     news = await res.json();
-    console.log(news.hits);
+    console.log(news);
   } catch (err) {
     console.log(err);
     news = [];
@@ -79,7 +69,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 };
 
 export default Index;
-
 
 /* 
 old data fetching method - getInitialProps

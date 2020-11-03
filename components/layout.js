@@ -1,9 +1,13 @@
 import Nav from './Nav';
+import SearchBar from './searchbar';
 
 const Layout = ({ mainTitle, footer, children }) => (
   <div>
     <Nav />
-    <h2>{mainTitle}</h2>
+    <div className='page-title'>
+      <h2>{mainTitle}</h2>
+      <SearchBar />
+    </div>
     <hr />
     {children}
     <hr />

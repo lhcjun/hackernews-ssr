@@ -14,18 +14,11 @@ const Nav = () => (
 
     <style jsx>{`
       a,
-      img {
-        margin: auto 0;
-        padding: 0.6rem 1rem;
-      }
-
-      a,
       a:hover,
       a:active,
       a:visited,
       a:focus {
         color: white;
-        text-decoration: none;
       }
     `}</style>
   </div>
