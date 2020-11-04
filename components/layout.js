@@ -1,4 +1,4 @@
-import Nav from './Nav';
+import Nav from './nav';
 import SearchBar from './searchbar';
 
 const Layout = ({ mainTitle, footer, children }) => (
@@ -16,7 +16,14 @@ const Layout = ({ mainTitle, footer, children }) => (
     <style jsx>{`
       h2,
       h5 {
-        margin: 1rem 2rem;
+        margin: 1rem 1rem 1rem 2rem;
+      }
+
+      @media screen and (max-width: 500px) {
+        h2 {
+          font-size: 1.2rem;
+          margin-right: 0;
+        }
       }
     `}</style>
   </div>

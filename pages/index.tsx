@@ -17,7 +17,7 @@ const Index: React.FC<IIndexProps> = ({ news }) => {
   return (
     <div>
       <Layout
-        mainTitle="News"
+        mainTitle="Related News"
         footer={`Copyright © ${new Date().getFullYear()}`}
       >
         {news.length ? (
