@@ -6,7 +6,7 @@ const Nav = () => (
       <img src="./static/logo.svg" alt="logo" height="50" className="logo" />
     </Link>
     <Link href="/">
-      <a className="nav-option">News</a>
+      <a className="nav-option">Related News</a>
     </Link>
     <Link href="/about">
       <a className="nav-option">About</a>

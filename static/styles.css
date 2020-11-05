@@ -113,10 +113,28 @@ a:focus {
   font-size: 1.1rem;
 }
 
+@media screen and (min-width: 736px) {
+  .search-area {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 735px) {
+  .search-area {
+    width: 45%;
+  }
+}
+
 @media screen and (max-width: 500px) {
   .search-area {
     width: 95%;
     margin: 1.7rem 0.8rem 1.5rem 0;
+  }
+}
+
+@media screen and (min-width: 401px) {
+  h2 {
+    white-space: nowrap;
   }
 }
 
@@ -142,4 +160,20 @@ a:focus {
 /* each news title */
 .each-news {
   margin: 1rem 2rem;
+}
+
+.each-news > a {
+  font-size: 1.3rem;
+}
+
+.created-at {
+  margin-top: 0.2rem;
+  display: flex;
+  color: #b3b1b1;
+}
+
+.created-at > img {
+  width: 0.8rem;
+  margin-right: 0.5rem;
+  margin-top: 0.15rem;
 }

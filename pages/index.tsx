@@ -22,11 +22,15 @@ const Index: React.FC<IIndexProps> = ({ news }) => {
       >
         {news.length ? (
           news.map((eachNews, i) => (
-            <p key={i} className="each-news">
+            <div key={i} className="each-news">
               <a href={eachNews.url} target="_blank">
                 {eachNews.title}
               </a>
-            </p>
+              <div className="created-at">
+                <img src="../static/time.svg" alt="created at"/>
+                {eachNews.created_at}
+              </div>
+            </div>
           ))
         ) : (
           <h3 className="empty-news">No Related News</h3>
