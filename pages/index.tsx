@@ -2,8 +2,9 @@ import * as React from 'react';
 import { GetServerSideProps } from 'next';
 import fetch from 'isomorphic-fetch';
 import Layout from '../components/layout';
+import EachNews from '../components/each-news';
 
-interface INews {
+export interface INews {
   created_at: string;
   title: string;
   url: string;
@@ -21,35 +22,11 @@ const Index: React.FC<IIndexProps> = ({ news }) => {
         footer={`Copyright © ${new Date().getFullYear()}`}
       >
         {news.length ? (
-          news.map((eachNews, i) => (
-            <div key={i} className="each-news">
-              <a href={eachNews.url} target="_blank">
-                {eachNews.title}
-              </a>
-              <div className="created-at">
-                <img src="../static/time.svg" alt="created at"/>
-                {eachNews.created_at}
-              </div>
-            </div>
-          ))
+          news.map((eachNews, i) => <EachNews eachNews={eachNews} key={i} />)
         ) : (
           <h3 className="empty-news">No Related News</h3>
         )}
       </Layout>
-
-      <style jsx>{`
-        a {
-          color: #1392af;
-        }
-        a:visited {
-          color: #491c67;
-        }
-        a:hover,
-        a:active,
-        a:focus {
-          color: #025296;
-        }
-      `}</style>
     </div>
   );
 };
@@ -77,8 +54,8 @@ export default Index;
 /* 
 old data fetching method - getInitialProps
 
-Initial page load → run on the server only
-Navigating to a different route via the next/link or next/router → run on the client
+  - Initial page load → run on the server only
+  - Navigating to a different route via the next/link or next/router → run on the client
 
     Index.getInitialProps = async ({ query }) => {
       let news;
