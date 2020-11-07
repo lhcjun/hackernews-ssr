@@ -14,8 +14,7 @@ interface IIndexProps {
   news?: Array<INews>;
 }
 
-const Index: React.FC<IIndexProps> = ({ news }) => {
-  return (
+const Index: React.FC<IIndexProps> = ({ news }) : JSX.Element => (
     <div>
       <Layout
         mainTitle="Related News"
@@ -28,8 +27,7 @@ const Index: React.FC<IIndexProps> = ({ news }) => {
         )}
       </Layout>
     </div>
-  );
-};
+);
 
 // new data fetching method (gets called on every req & only runs on server-side)
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {

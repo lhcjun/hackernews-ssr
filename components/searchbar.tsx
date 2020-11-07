@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 
-const SearchBar: React.FC = () => {
+const SearchBar: React.FC = (): JSX.Element => {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState('');
 
