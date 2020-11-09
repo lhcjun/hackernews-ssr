@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next';
 import fetch from 'isomorphic-fetch';
 import Layout from '../components/layout';
 import EachNews from '../components/each-news';
-import Pagination from '../components/pagination';
+import Pagination from '../components/pagination/pagination';
 
 export interface INews {
   created_at: string;
@@ -37,8 +37,9 @@ const Index: React.FC<IIndexProps> = ({ news, currentPage, totalPages }) : JSX.E
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   // grab user input query from url router
   let news;
+  console.log(query);
   try {
-    const res = await fetch(`https://hn.algolia.com/api/v1/search?query=${query.searchTerm || 'react'}&page=49`);
+    const res = await fetch(`https://hn.algolia.com/api/v1/search?query=${query.searchTerm || 'react'}&page=${query.page || 0}`);
     news = await res.json();
     console.log(news);
   } catch (err) {

@@ -178,3 +178,39 @@ a:focus {
     margin-right: 0.5rem;
     margin-top: 0.15rem;
 }
+
+/* pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    min-height: 2rem;
+    margin: 0.2rem auto 1rem;
+}
+
+.pagination ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: .875em;
+    font-family: inherit;
+    line-height: 2em;
+}
+
+.pagination .switch-page {
+    display: inline-block;
+    padding: 0px 1px;
+    margin: 0px 9px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.switch-page:hover {
+    font-weight: bold;
+    border-bottom: 1px solid #0088cc;
+}
+
+.disabled {
+    cursor: default;
+    pointer-events: none;
+    color: #999999;
+}
