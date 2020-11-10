@@ -22,7 +22,7 @@ const SearchBar: React.FC = (): JSX.Element => {
       <input
         type="search"
         // value={searchValue}
-        placeholder="News Keyword"
+        placeholder="e.g. React"
         onChange={onInputChange}
         className="search-box"
       />

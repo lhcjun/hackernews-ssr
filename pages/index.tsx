@@ -9,6 +9,8 @@ export interface INews {
   created_at: string;
   title: string;
   url: string;
+  story_title?: string;
+  story_url?: string;
 }
 
 interface IIndexProps {
@@ -17,20 +19,20 @@ interface IIndexProps {
   totalPages?: number;
 }
 
-const Index: React.FC<IIndexProps> = ({ news, currentPage, totalPages }) : JSX.Element => (
-    <div>
-      <Layout
-        mainTitle="Related News"
-        footer={`Copyright © ${new Date().getFullYear()}`}
-      >
-        {news.length ? (
-          news.map((eachNews, i) => <EachNews eachNews={eachNews} key={i} />)
-        ) : (
-          <h3 className="empty-news">No Related News</h3>
-        )}
+const Index: React.FC<IIndexProps> = ({ news, currentPage, totalPages }): JSX.Element => (
+  <div>
+    <Layout
+      mainTitle="Related News"
+      footer={`Copyright © ${new Date().getFullYear()}`}
+    >
+      {news.length ? (
+        news.map((eachNews, i) => <EachNews eachNews={eachNews} key={i} />)
+      ) : <h3 className="empty-news">No Related News</h3>}
+      {news.length ? (
         <Pagination currentPage={currentPage} totalPages={totalPages} />
-      </Layout>
-    </div>
+      ) : null}
+    </Layout>
+  </div>
 );
 
 // new data fetching method (gets called on every req & only runs on server-side)
@@ -39,7 +41,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   let news;
   console.log(query);
   try {
-    const res = await fetch(`https://hn.algolia.com/api/v1/search?query=${query.searchTerm || 'react'}&page=${query.page || 0}`);
+    const res = await fetch(
+      `https://hn.algolia.com/api/v1/search?query=${query.searchTerm || 'react'}&page=${query.page || 0}`);
     news = await res.json();
     console.log(news);
   } catch (err) {
@@ -48,10 +51,10 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   }
 
   return {
-    props: { 
+    props: {
       news: news.hits,
-      currentPage: news.page,        // current page (start from 0, up to 49)
-      totalPages: news.nbPages       // total page numbers
+      currentPage: news.page,   // current page (start from 0, up to 49)
+      totalPages: news.nbPages, // total page numbers
     },
   };
 };

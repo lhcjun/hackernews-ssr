@@ -102,7 +102,7 @@ a:focus {
 }
 
 .search-btn:hover {
-    background: #58b1da;
+    background: rgb(95, 190, 235);
 }
 
 .empty-news {
@@ -179,6 +179,11 @@ a:focus {
     margin-top: 0.15rem;
 }
 
+.post-not-found {
+    color: #c5c5c5;
+    margin: 0.8rem 2rem;
+}
+
 /* pagination */
 .pagination {
     display: flex;
@@ -213,4 +218,26 @@ a:focus {
     cursor: default;
     pointer-events: none;
     color: #999999;
+}
+
+.pagination .is-active {
+    display: inline-block;
+    padding: 0px 1px;
+    margin: 0px 9px;
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: 1px solid #0088cc;
+    color: #0088cc;
+    /* un-clickable */
+    cursor: default;
+    pointer-events: none;
+}
+
+.page-ellipsis {
+    display: inline-block;
+    padding: 0px 9px;
+    margin-right: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #717171;
 }

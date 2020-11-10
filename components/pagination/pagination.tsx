@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import SwitchPage from './switch-page';
 import Page from './page';
 
 interface IPaginationProps {
-    currentPage: number;
-    totalPages: number;
-  }
+  currentPage: number;
+  totalPages: number;
+}
 
 const Pagination: React.FC<IPaginationProps> = ({ currentPage, totalPages }): JSX.Element => {
   const router = useRouter();
-  const [pageNumNextToActivePage, setPageNumNextToActivePage] = useState(1);
-
   let currentPageNum = currentPage + 1; // currentPage: start from 0 & up to 49
 
-  const changeCurrentPage = (goPage) => {
+  const changeCurrentPage = (goPage: number) => {
+    // push goPage to url router
     router.push({
       query: { 
         searchTerm: router.query.searchTerm,
@@ -40,9 +39,10 @@ const Pagination: React.FC<IPaginationProps> = ({ currentPage, totalPages }): JS
           />
         {/* page number */}
           <Page 
-            currentPageNum={currentPageNum} pageNumNextToActivePage={pageNumNextToActivePage} 
-            pageNum={totalPages} changeCurrentPage={changeCurrentPage} 
+            currentPageNum={currentPageNum} totalPages={totalPages} 
+            changeCurrentPage={changeCurrentPage} 
           />
+        {/* next page */}
           <SwitchPage 
             className={currentPageNum === totalPages ? 'switch-page disabled': 'switch-page'}
             label="⟩" goPage={currentPage + 1} changeCurrentPage={changeCurrentPage}

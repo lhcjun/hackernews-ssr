@@ -1,43 +1,52 @@
-import React from 'react';
+interface IPageProps {
+  currentPageNum: number;
+  totalPages: number;
+  changeCurrentPage: (goPage: number) => void; // Function
+}
 
-const Page = ({ currentPageNum, pageNumNextToActivePage, pageNum, changeCurrentPage }) => {
-  let left = currentPageNum - pageNumNextToActivePage,
+const Page = ({ currentPageNum, totalPages, changeCurrentPage }: IPageProps) => {
+  let pageNumNextToActivePage = 1,
+    left = currentPageNum - pageNumNextToActivePage,
     right = currentPageNum + pageNumNextToActivePage + 1,
-    range = [],
-    rangeWithEllipsis = [],
-    l = undefined,
+    range: Array<number> = [],
+    rangeWithEllipsis: Array<JSX.Element> = [],
+    lastRangeNum: number| undefined = undefined,
     isEllipsisIncludes = false;
 
-  for (let i = 1; i <= pageNum; i++) {
-    if (i === 1 || i === pageNum || (i >= left && i < right)) {
+  // get the range of page numbers (1, n-1, n, n+1, last)
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || (i >= left && i < right)) {
       range.push(i);
     }
   }
 
+  // insert ellipsis between the two discontinuous page number
   for (let i of range) {
-    if (l && i - l !== 1) {
+    // if i - lastRangeNum >= 2 ⇒ push ellipsis into [] (between lastRangeNum & i → lastRangeNum ... i)
+    if (lastRangeNum && i - lastRangeNum !== 1) {
       rangeWithEllipsis.push(
-        <li key={isEllipsisIncludes ? -1 : 0} className="pageElli">
+        <li key={isEllipsisIncludes ? -1 : 0} className="page-ellipsis">
           <a> . . .</a>
         </li>
       );
       isEllipsisIncludes = true;
     }
+    // push page number(i) into []
     rangeWithEllipsis.push(
       <li
         key={i}
-        className={currentPageNum === i ? 'is-active' : 'page'}
+        className={currentPageNum === i ? 'is-active' : 'switch-page'}
         onClick={(e) => {
           e.preventDefault();
-          changeCurrentPage(i);
+          changeCurrentPage(i - 1);
         }}
       >
         <a>{i}</a>
       </li>
     );
-    l = i;
+    lastRangeNum = i;
   }
-return <li>{rangeWithEllipsis}</li>;
+  return <span>{rangeWithEllipsis}</span>;
 };
 
 export default Page;
