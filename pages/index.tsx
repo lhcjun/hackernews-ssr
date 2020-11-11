@@ -39,7 +39,6 @@ const Index: React.FC<IIndexProps> = ({ news, currentPage, totalPages }): JSX.El
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   // grab user input query from url router
   let news;
-  console.log(query);
   try {
     const res = await fetch(
       `https://hn.algolia.com/api/v1/search?query=${query.searchTerm || 'react'}&page=${query.page || 0}`);

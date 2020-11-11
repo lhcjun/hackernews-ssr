@@ -21,7 +21,7 @@ const EachNews: React.FC<IEachNewsProps> = ({ eachNews }): JSX.Element => {
 
         <style jsx>{`
           a {
-            color: #2a98cc;
+            color: #0088cc;
           }
           a:visited {
             color: #491c67;
